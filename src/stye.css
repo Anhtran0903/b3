@@ -1,0 +1,7 @@
+.ipSearch{
+    background-color: orangered;
+}
+.mt-2.active p{
+        text-decoration: line-through;
+        color: red;
+}
