@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Student from './Student';
 import { Container, ListGroup } from 'reactstrap';
 import Add from './Add';
@@ -36,22 +36,35 @@ function Students(props) {
 
         },
 
-
+    
 
     ])
+
+
+
+    useEffect(()=>{
+        if(localStorage.getItem("List")){
+            setList(JSON.parse(localStorage.getItem("List")))
+        }},[])
     const deleteId = (id) => {
-        setList(list.filter(Student => Student.id !== id))
+        let newList =list.filter(Student => Student.id !== id)
+        setList(newList)
+        localStorage.setItem("List",JSON.stringify(newList))
     }
     const deleteAll = () => {
-        setList(list.filter(Student => Student.checked == false))
+        let newList = list.filter(Student => Student.checked == false)
+        setList(newList)
+       localStorage.setItem("List",JSON.stringify(newList))
     }
     const recheck = (id) => {
-        let newLsit = list.map((Stu => Stu.id === id ? { ...Stu, checked: !Stu.checked } : Stu))
-        setList(newLsit);
+        let newList = list.map((Stu => Stu.id === id ? { ...Stu, checked: !Stu.checked } : Stu))
+        setList(newList);
+       localStorage.setItem("List",JSON.stringify(newList))
     }
     const addNew = (text) => {
-        setList([...list, { id: list.length + 2, name: text, checked: false }])
-
+        let newList =[...list, { id: list.length + 2, name: text, checked: false }]
+        setList(newList)
+       localStorage.setItem("List",JSON.stringify(newList))
     }
     const fielList = (list, flag) => {
         if (flag == "check") {
@@ -62,8 +75,9 @@ function Students(props) {
         return list;
     }
     const rename = (id,name) =>{
-                    let newlista = list.map(stud=>stud.id==id?{...stud,name:name}:stud)
-                    setList(newlista);
+                    let newList = list.map(stud=>stud.id==id?{...stud,name:name}:stud)
+                    setList(newList);
+                   localStorage.setItem("List",JSON.stringify(newList))
     }
 
 
