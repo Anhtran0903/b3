@@ -5,3 +5,11 @@
         text-decoration: line-through;
         color: red;
 }
+.nat{
+    width: 400px;
+    height: 400px;
+    background-color: aqua;
+}
+.nat.active{
+    background-color: blue;
+}
